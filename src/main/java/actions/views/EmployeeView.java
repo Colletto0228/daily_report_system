@@ -14,7 +14,7 @@ import lombok.Setter;
 
 public class EmployeeView {
 
-    private Integer Id;
+    private Integer id;
 
     private String code;
 

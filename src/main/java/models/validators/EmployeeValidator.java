@@ -47,21 +47,21 @@ public class EmployeeValidator {
         return "";
     }
 
-    private static long idDuplicateEmployee(EmployeeService service,String code) {
+    private static long isDuplicateEmployee(EmployeeService service,String code) {
         long employeeConst = service.countByCode(code);
         return employeeConst;
     }
 
-    private static validateName(String name) {
+    private static String validateName(String name) {
         if(name == null || name.equals("")) {
             return MessageConst.E_NONAME.getMessage();
         }
-        return "";
+        return  "";
     }
 
     private static String validatePassword(String password,Boolean passwordCheckFlag) {
         if(passwordCheckFlag && (password == null || password.equals(""))) {
-            return MessageConst.E_NONAME.getMessage();
+            return MessageConst.E_NOPASSWORD.getMessage();
         }
 
         return "";

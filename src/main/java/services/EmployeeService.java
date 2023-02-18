@@ -40,16 +40,20 @@ public class EmployeeService extends ServiceBase {
                     .setParameter(JpaConst.JPQL_PARM_PASSWORD,pass)
                     .getSingleResult();
         }catch(NoResultException ex){
-
         }
         return EmployeeConverter.toView(e);
     }
 
+    public EmployeeView findOne(int id) {
+        Employee e = findOneInternal(id);
+        return EmployeeConverter.toView(e);
+    }
+
     public long countByCode(String code) {
-        long employee_count = (long) em.createNamedQuery(JpaConst.Q_EMP_COUNT_REGISTERED_BY_CODE,Long.class)
+        long employees_count = (long) em.createNamedQuery(JpaConst.Q_EMP_COUNT_REGISTERED_BY_CODE,Long.class)
                 .setParameter(JpaConst.JPQL_PARM_CODE,code)
                 .getSingleResult();
-        return employee_count;
+        return employees_count;
     }
 
     public List<String> create(EmployeeView ev,String pepper){
