@@ -50,11 +50,11 @@ public class AuthAction extends ActionBase {
 
                 putSessionScope(AttributeConst.LOGIN_EMP,ev);
 
-                putSessionScope(AttributeConst.FLUSH,MessageConst.I_LOGINED.getMessage());
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_LOGINED.getMessage());
 
                 redirect(ForwardConst.ACT_TOP,ForwardConst.CMD_INDEX);
             }
-        }else {
+        }else{
 
             putRequestScope(AttributeConst.TOKEN,getTokenId());
             putRequestScope(AttributeConst.LOGIN_ERR,true);
