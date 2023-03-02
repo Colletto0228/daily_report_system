@@ -17,7 +17,8 @@ public interface JpaConst {
     String EMP_COL_UPDATED_AT = "updated_at";
     String EMP_COL_DELETE_FLAG = "delete_flag";
 
-    int ROLE_ADMIN = 1;
+    int ROLE_MANAGER = 2;
+    int ROLE_CHIEF = 1;
     int ROLE_GENERAL = 0;
     int EMP_DEL_TRUE = 1;
     int EMP_DEL_FALSE = 0;
