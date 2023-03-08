@@ -6,18 +6,13 @@
 <c:set var= "actRep" value= "${ForwardConst.ACT_REP.getValue()}" />
 <c:set var= "commIdx" value= "${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var= "commShow" value= "${ForwardConst.CMD_SHOW.getValue()}" />
-<c:set var= "commNew" value= "${ForwardConst.CMD_NEW.getValue()}" />
-<c:set var= "commCertS" value= "${ForwardConst.CMD_CERT_SHOW.getValue()}" />
+<c:set var= "commCer" value= "${ForwardConst.CMD_CERT.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:if test="${flush != null}">
-            <div id= "flush_success">
-                <c:out value="${flush}"></c:out>
-            </div>
-        </c:if>
-        <h2>日報 一覧</h2>
-        <c:if test="${report.certFlag == 0}">
+        <h2>承認済み日報</h2>
+
+        <c:if test="${report.certFlag == 1}">
             <table id= "report_list">
             <tbody>
                 <tr>
@@ -37,25 +32,11 @@
                     </tr>
                 </c:forEach>
             </tbody>
-            </table>
+        </table>
         </c:if>
-        <div id= "pagination">
-            (全 ${reports_count} 件)<br />
-            <c:forEach var= "i" begin= "1" end= "${((reports_count - 1) / maxRow) + 1}" step= "1">
-                <c:choose>
-                    <c:when test="${i == page}">
-                        <c:out value="${i}" />&nbsp;
-                    </c:when>
-                    <c:otherwise>
-                        <a href= "<c:url value= '?action=${actRep}&command=${commIdx}&page=${i}' />"><c:out value="${i}" /></a> &nbsp;
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </div>
 
-        <c:if test="${employee.adminFlag == AttributeConst.ROLE_MANAGER.getIntegerValue()}">
-            <p><a href= "<c:url value= '?action=${actRep}&command=${commCertS}' />">承認済み日報</a></p>
-        </c:if>
-            <p><a href= "<c:url value= '?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
+        <p>
+            <a href= "<c:url value= '?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>
+        </p>
     </c:param>
 </c:import>

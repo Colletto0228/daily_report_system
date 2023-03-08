@@ -88,4 +88,16 @@ public class ReportService extends ServiceBase {
         em.getTransaction().commit();
     }
 
+    public void cert(Integer id) {
+        ReportView savedRep = findOne(id);
+
+        LocalDateTime today = LocalDateTime.now();
+        savedRep.setUpdatedAt(today);
+
+        savedRep.setCertFlag(JpaConst.REP_CERT_TRUE);
+
+        update(savedRep);
+    }
+
+
 }

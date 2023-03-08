@@ -30,6 +30,9 @@ public enum AttributeConst {
     DEL_FLAG_TRUE(1),
     DEL_FLAG_FALSE(0),
 
+    CERT_FLAG_TRUE(1),
+    CERT_FLAG_FALSE(0),
+
     REPORT("report"),
     REPORTS("reports"),
     REP_COUNT("reports_count"),
@@ -37,6 +40,7 @@ public enum AttributeConst {
     REP_DATE("report_date"),
     REP_TITLE("title"),
     REP_CONTENT("content_msg");
+
 
 
     private final String text;

@@ -22,6 +22,8 @@ public interface JpaConst {
     int ROLE_GENERAL = 0;
     int EMP_DEL_TRUE = 1;
     int EMP_DEL_FALSE = 0;
+    int REP_CERT_TRUE = 1;
+    int REP_CERT_FALSE = 0;
 
     String TABLE_REP = "reports";
 
@@ -32,6 +34,7 @@ public interface JpaConst {
     String REP_COL_CONTENT = "content";
     String REP_COL_CREATED_AT = "created_at";
     String REP_COL_UPDATED_AT = "updated_at";
+    String REP_COL_CERT_FLAG = "cert_flag";
 
     String ENTITY_EMP = "employee";
     String ENTITY_REP = "report";
@@ -63,5 +66,7 @@ public interface JpaConst {
 
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
+
+
 
 }

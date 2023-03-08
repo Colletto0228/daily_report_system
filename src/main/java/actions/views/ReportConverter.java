@@ -3,6 +3,8 @@ package actions.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import constants.AttributeConst;
+import constants.JpaConst;
 import models.Report;
 
 public class ReportConverter {
@@ -15,7 +17,12 @@ public class ReportConverter {
                 rv.getTitle(),
                 rv.getContent(),
                 rv.getCreatedAt(),
-                rv.getUpdatedAt());
+                rv.getUpdatedAt(),
+                rv.getCertFlag() == null
+                    ? null
+                    :rv.getCertFlag() == AttributeConst.CERT_FLAG_TRUE.getIntegerValue()
+                        ? JpaConst.REP_CERT_TRUE
+                        : JpaConst.REP_CERT_FALSE);
     }
 
     public static ReportView toView(Report r) {
@@ -30,7 +37,12 @@ public class ReportConverter {
                 r.getTitle(),
                 r.getContent(),
                 r.getCreatedAt(),
-                r.getUpdatedAt());
+                r.getUpdatedAt(),
+                r.getCertFlag() == null
+                    ? null
+                    : r.getCertFlag() == JpaConst.REP_CERT_TRUE
+                        ? AttributeConst.CERT_FLAG_TRUE.getIntegerValue()
+                        : AttributeConst.CERT_FLAG_FALSE.getIntegerValue());
     }
 
     public static List<ReportView> toViewList(List<Report> list){
@@ -50,6 +62,7 @@ public class ReportConverter {
         r.setContent(rv.getContent());
         r.setCreatedAt(rv.getCreatedAt());
         r.setUpdatedAt(rv.getUpdatedAt());
+        r.setCertFlag(rv.getCertFlag());
     }
 
 }

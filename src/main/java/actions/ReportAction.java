@@ -77,7 +77,8 @@ public class ReportAction extends ActionBase {
                     getRequestParam(AttributeConst.REP_TITLE),
                     getRequestParam(AttributeConst.REP_CONTENT),
                     null,
-                    null);
+                    null,
+                    AttributeConst.CERT_FLAG_FALSE.getIntegerValue());
 
             List<String> errors = service.create(rv);
 
@@ -151,6 +152,34 @@ public class ReportAction extends ActionBase {
                 redirect(ForwardConst.ACT_REP,ForwardConst.CMD_INDEX);
             }
         }
+    }
+
+    public void certShow() throws ServletException,IOException{
+
+        int page = getPage();
+        List<ReportView> reports = service.getAllPerPage(page);
+
+        long reportsCount = service.countAll();
+
+        putRequestScope(AttributeConst.REPORTS,reports);
+        putRequestScope(AttributeConst.REP_COUNT,reportsCount);
+        putRequestScope(AttributeConst.PAGE,page);
+        putRequestScope(AttributeConst.MAX_ROW,JpaConst.ROW_PER_PAGE);
+
+        String flush = getSessionScope(AttributeConst.FLUSH);
+        if(flush != null) {
+            putRequestScope(AttributeConst.FLUSH,flush);
+            removeSessionScope(AttributeConst.FLUSH);
+        }
+        forward(ForwardConst.FW_REP_CERTSHOW);
+    }
+
+    public void cert() throws ServletException,IOException{
+            service.cert(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+            putSessionScope(AttributeConst.FLUSH,MessageConst.I_CERT.getMessage());
+
+            redirect(ForwardConst.ACT_REP,ForwardConst.CMD_INDEX);
     }
 
 }
