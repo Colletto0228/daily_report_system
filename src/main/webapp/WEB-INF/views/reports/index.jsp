@@ -2,6 +2,7 @@
 <%@ taglib prefix= "c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix= "fmt" uri= "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import= "constants.ForwardConst" %>
+<%@ page import= "constants.AttributeConst" %>
 
 <c:set var= "actRep" value= "${ForwardConst.ACT_REP.getValue()}" />
 <c:set var= "commIdx" value= "${ForwardConst.CMD_INDEX.getValue()}" />
@@ -17,7 +18,6 @@
             </div>
         </c:if>
         <h2>日報 一覧</h2>
-        <c:if test="${report.certFlag == 0}">
             <table id= "report_list">
             <tbody>
                 <tr>
@@ -27,6 +27,7 @@
                     <th class= "report_action">操作</th>
                 </tr>
                 <c:forEach var= "report" items= "${reports}" varStatus= "status">
+                <c:if test="${report.certFlag == 0}">
                     <fmt:parseDate value= "${report.reportDate}" pattern= "yyyy-MM-dd" var= "reportDay" type= "date" />
 
                     <tr class= "row${status.count % 2}">
@@ -35,10 +36,10 @@
                         <td class= "report_title">${report.title}</td>
                         <td class= "report_action"><a href= "<c:url value= '?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
                     </tr>
+                    </c:if>
                 </c:forEach>
             </tbody>
             </table>
-        </c:if>
         <div id= "pagination">
             (全 ${reports_count} 件)<br />
             <c:forEach var= "i" begin= "1" end= "${((reports_count - 1) / maxRow) + 1}" step= "1">
@@ -53,7 +54,7 @@
             </c:forEach>
         </div>
 
-        <c:if test="${employee.adminFlag == AttributeConst.ROLE_MANAGER.getIntegerValue()}">
+        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_MANAGER.getIntegerValue()}">
             <p><a href= "<c:url value= '?action=${actRep}&command=${commCertS}' />">承認済み日報</a></p>
         </c:if>
             <p><a href= "<c:url value= '?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
