@@ -163,7 +163,7 @@ public class EmployeeAction extends ActionBase {
     private boolean checkAdmin() throws ServletException,IOException{
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
-        if(ev.getAdminFlag() != AttributeConst.ROLE_MANAGER.getIntegerValue()) {
+        if(ev.getAdminFlag() != AttributeConst.ROLE_MANAGER.getIntegerValue() && ev.getAdminFlag() != AttributeConst.ROLE_CHIEF.getIntegerValue()) {
             forward(ForwardConst.FW_ERR_UNKNOWN);
             return false;
         }else {

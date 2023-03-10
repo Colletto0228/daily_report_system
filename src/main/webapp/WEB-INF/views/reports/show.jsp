@@ -40,22 +40,26 @@
                 </tr>
             </tbody>
         </table>
-        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_MANAGER.getIntegerValue() || sessionScope.login_employee.adminFlag == AttributeConst.ROLE_CHIEF.getIntegerValue()}">
-            <p>
-                <a href= "#" onclick= "confirmCert();">この日報を承認する</a>
-            </p>
-            <form method= "POST" action= "<c:url value='?action=${actRep}&command=${commCert}'/>">
-            <input type= "hidden" name= "${AttributeConst.REP_ID.getValue()}" value= "${report.id}" />
-            <input type= "hidden" name= "${AttributeConst.TOKEN.getValue()}" value= "${_token}" />
-            </form>
-        <script>
+
+        <c:if test="${report.certFlag == 0}">
+            <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_MANAGER.getIntegerValue() || sessionScope.login_employee.adminFlag == AttributeConst.ROLE_CHIEF.getIntegerValue()}">
+                <p>
+                     <a href= "#" onclick= "confirmCert();">この日報を承認する</a>
+                </p>
+                <form method= "POST" action= "<c:url value='?action=${actRep}&command=${commCert}'/>">
+                <input type= "hidden" name= "${AttributeConst.REP_ID.getValue()}" value= "${report.id}" />
+                <input type= "hidden" name= "${AttributeConst.TOKEN.getValue()}" value= "${_token}" />
+                </form>
+            <script>
              function confirmCert(){
-                 if(confirm("この日報を承認しますか？")){
-                     document.forms[0].submit();
+                     if(confirm("この日報を承認しますか？")){
+                         document.forms[0].submit();
+                      }
                  }
-             }
-        </script>
+             </script>
+            </c:if>
         </c:if>
+
         <c:if test="${sessionScope.login_employee.id == report.employee.id}">
             <p>
                 <a href= "<c:url value= '?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>
