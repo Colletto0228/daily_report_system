@@ -40,8 +40,7 @@
                 </tr>
             </tbody>
         </table>
-
-        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_MANAGER.getIntegerValue()}">
+        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_MANAGER.getIntegerValue() || sessionScope.login_employee.adminFlag == AttributeConst.ROLE_CHIEF.getIntegerValue()}">
             <p>
                 <a href= "#" onclick= "confirmCert();">この日報を承認する</a>
             </p>
@@ -57,7 +56,6 @@
              }
         </script>
         </c:if>
-
         <c:if test="${sessionScope.login_employee.id == report.employee.id}">
             <p>
                 <a href= "<c:url value= '?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>

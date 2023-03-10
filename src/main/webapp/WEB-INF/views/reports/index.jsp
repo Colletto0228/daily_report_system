@@ -54,7 +54,7 @@
             </c:forEach>
         </div>
 
-        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_MANAGER.getIntegerValue()}">
+        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_MANAGER.getIntegerValue() || sessionScope.login_employee.adminFlag == AttributeConst.ROLE_CHIEF.getIntegerValue()}">
             <p><a href= "<c:url value= '?action=${actRep}&command=${commCertS}' />">承認済み日報</a></p>
         </c:if>
             <p><a href= "<c:url value= '?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
